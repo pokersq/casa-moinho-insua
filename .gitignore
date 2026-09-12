@@ -1,0 +1,8 @@
+.claude/
+feedback_alteracoes.txt
+info_alojamento.txt
+livros/
+
+# OS junk
+Thumbs.db
+desktop.ini
