@@ -1,14 +1,31 @@
 {
   "phone": "963 238 660",
   "whatsapp": true,
-  "email": "",
   "instagram": "casamoinhodainsua",
-  "facebook": "",
+  "facebook": "abcd",
   "addressLine1": "Rua Davim, 4820-820",
   "addressLine2": "Várzea Cova",
   "nearby": [
-    { "name": { "pt": "Castelo de Guimarães", "en": "Guimarães Castle" }, "distance": "27 km" },
-    { "name": { "pt": "Paço dos Duques de Bragança", "en": "Palace of the Dukes of Bragança" }, "distance": "27 km" },
-    { "name": { "pt": "Aeroporto Francisco Sá Carneiro", "en": "Francisco Sá Carneiro Airport" }, "distance": "80 km" }
+    {
+      "name": {
+        "pt": "Castelo de Guimarães",
+        "en": "Guimarães Castle"
+      },
+      "distance": "27 km"
+    },
+    {
+      "name": {
+        "pt": "Paço dos Duques de Bragança",
+        "en": "Palace of the Dukes of Bragança"
+      },
+      "distance": "27 km"
+    },
+    {
+      "name": {
+        "pt": "Aeroporto Francisco Sá Carneiro",
+        "en": "Francisco Sá Carneiro Airport"
+      },
+      "distance": "80 km"
+    }
   ]
 }
