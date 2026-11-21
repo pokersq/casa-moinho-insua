@@ -1,0 +1,33 @@
+{
+  "hero": "/fotos/fotos_exterior/exterior_011.jpg",
+  "aboutMain": "/fotos/fotos_exterior/exterior_001.jpg",
+  "aboutSub": "/fotos/fotos_exterior/exterior_005.jpg",
+  "gallery": [
+    { "image": "/fotos/fotos_interior/interior_001.jpg", "category": "interior" },
+    { "image": "/fotos/fotos_interior/interior_002.jpg", "category": "interior" },
+    { "image": "/fotos/fotos_interior/interior_003.jpg", "category": "interior" },
+    { "image": "/fotos/fotos_interior/interior_004.jpg", "category": "interior" },
+    { "image": "/fotos/fotos_interior/interior_005.jpg", "category": "interior" },
+    { "image": "/fotos/fotos_interior/interior_006.jpg", "category": "interior" },
+    { "image": "/fotos/fotos_interior/interior_007.jpg", "category": "interior" },
+    { "image": "/fotos/fotos_interior/interior_008.jpg", "category": "interior" },
+    { "image": "/fotos/fotos_interior/interior_009.jpg", "category": "interior" },
+    { "image": "/fotos/fotos_interior/interior_010.jpg", "category": "interior" },
+    { "image": "/fotos/fotos_interior/interior_011.jpg", "category": "interior" },
+    { "image": "/fotos/fotos_interior/interior_012.jpg", "category": "interior" },
+    { "image": "/fotos/fotos_interior/interior_013.jpg", "category": "interior" },
+    { "image": "/fotos/fotos_interior/interior_014.jpg", "category": "interior" },
+    { "image": "/fotos/fotos_exterior/exterior_001.jpg", "category": "exterior" },
+    { "image": "/fotos/fotos_exterior/exterior_002.jpg", "category": "exterior" },
+    { "image": "/fotos/fotos_exterior/exterior_003.jpg", "category": "exterior" },
+    { "image": "/fotos/fotos_exterior/exterior_004.jpg", "category": "exterior" },
+    { "image": "/fotos/fotos_exterior/exterior_005.jpg", "category": "exterior" },
+    { "image": "/fotos/fotos_exterior/exterior_006.jpg", "category": "exterior" },
+    { "image": "/fotos/fotos_exterior/exterior_007.jpg", "category": "exterior" },
+    { "image": "/fotos/fotos_exterior/exterior_008.jpg", "category": "exterior" },
+    { "image": "/fotos/fotos_exterior/exterior_009.jpg", "category": "exterior" },
+    { "image": "/fotos/fotos_exterior/exterior_010.jpg", "category": "exterior" },
+    { "image": "/fotos/fotos_exterior/exterior_011.jpg", "category": "exterior" },
+    { "image": "/fotos/fotos_exterior/exterior_012.jpg", "category": "exterior" }
+  ]
+}

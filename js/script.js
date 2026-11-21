@@ -2,9 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ---------- Page loader ---------- */
   const loader = document.getElementById('pageLoader');
-  window.addEventListener('load', () => {
-    setTimeout(() => loader.classList.add('is-hidden'), 300);
-  });
+  const pageLoaded = new Promise(resolve => window.addEventListener('load', resolve));
 
   /* ---------- Header scroll state ---------- */
   const header = document.getElementById('siteHeader');
@@ -29,31 +27,129 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ---------- Footer year ---------- */
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  /* ---------- Gallery data ---------- */
-  const exteriorCount = 12;
-  const interiorCount = 14;
+  /* ---------- Content (content/*.json, editado no Pages CMS) ---------- */
+  const contentFiles = ['fotos', 'textos', 'alojamento', 'contactos', 'aviso'];
+  let content = null;
+
+  const loadContent = () => Promise.all(contentFiles.map(name =>
+    fetch(`content/${name}.json`, { cache: 'no-cache' }).then(r => {
+      if (!r.ok) throw new Error(`content/${name}.json: ${r.status}`);
+      return r.json();
+    })
+  )).then(results => {
+    content = {};
+    contentFiles.forEach((name, i) => { content[name] = results[i]; });
+  });
+
+  const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  // Pages CMS grava caminhos como "/fotos/x.jpg"; sem a barra inicial funcionam também em pokersq.github.io/casa-moinho-insua/
+  const imgSrc = (path) => encodeURI(String(path || '').replace(/^\/+/, ''));
+  // Texto bilingue { pt, en }: se o inglês estiver vazio, mostra o português
+  const tr = (obj, lang) => (obj && (obj[lang] || obj.pt)) || '';
+  const getPath = (path) => path.split('.').reduce((o, k) => (o ? o[k] : undefined), content);
+
+  /* ---------- Icons ---------- */
+  const amenityIcons = {
+    house: '<path d="M3 20V10l9-6 9 6v10h-6v-6H9v6z"/>',
+    kitchen: '<path d="M4 4h16v10H4zM2 20h20M6 14v6M18 14v6"/>',
+    bathroom: '<path d="M7 3v18M17 3v6a3 3 0 0 1-3 3H7M17 15v6"/>',
+    tv: '<rect x="2" y="4" width="20" height="14" rx="1"/><path d="M8 21h8"/>',
+    wifi: '<path d="M12 19V6M6 11l6-7 6 7M4 19h16"/>',
+    parking: '<path d="M5 17h14M6 17V9l6-4 6 4v8M9 17v-5h6v5"/>',
+    climate: '<circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/>',
+    terrace: '<path d="M12 2v6M8 8l4-6 4 6M5 10h14l-2 10H7z"/>',
+    bbq: '<circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/>',
+    river: '<path d="M3 18c3-9 6-13 9-13s6 4 9 13"/><path d="M3 18h18"/>',
+    check: '<circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/>',
+  };
+  const contactIcons = {
+    phone: '<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.5 2.1L8 9.7a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.7 2.3z"/>',
+    whatsapp: '<path d="M20.5 3.5a10.6 10.6 0 0 0-17.9 11L2 21l6.7-1.5a10.6 10.6 0 0 0 15.5-9A10.5 10.5 0 0 0 20.5 3.5zM12 19a8 8 0 0 1-4.1-1.1l-.3-.2-3 .7.7-2.9-.2-.3A8 8 0 1 1 12 19z"/><path d="M16.5 13.6c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1s-.6.8-.7.9-.3.2-.5.1a6.5 6.5 0 0 1-1.9-1.2 7.2 7.2 0 0 1-1.3-1.6c-.1-.2 0-.4.1-.5l.4-.4.2-.4v-.4c0-.1-.5-1.3-.7-1.7s-.4-.4-.5-.4h-.5a.9.9 0 0 0-.6.3 2.7 2.7 0 0 0-.9 2 4.7 4.7 0 0 0 1 2.5 10.7 10.7 0 0 0 4.1 3.6c.6.2 1 .4 1.4.5a3.3 3.3 0 0 0 1.5.1 2.5 2.5 0 0 0 1.6-1.1 1.9 1.9 0 0 0 .1-1.1c-.1-.1-.2-.2-.4-.3z"/>',
+    instagram: '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/>',
+    facebook: '<path d="M15 3h-2a4 4 0 0 0-4 4v3H7v4h2v7h4v-7h3l1-4h-4V7a1 1 0 0 1 1-1h2z"/>',
+    email: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/>',
+    address: '<path d="M12 22s7-7.5 7-13a7 7 0 0 0-14 0c0 5.5 7 13 7 13z"/><circle cx="12" cy="9" r="2.5"/>',
+  };
+
+  /* ---------- Render: static parts (independent of language) ---------- */
+  const grid = document.getElementById('galleryGrid');
   const layoutHints = ['wide', '', '', 'tall', '', '', 'wide', '', '', 'tall', '', '', '', ''];
 
-  const images = [];
-  for (let i = 1; i <= interiorCount; i++) {
-    const n = String(i).padStart(3, '0');
-    images.push({ src: `fotos/fotos_interior/interior_${n}.jpg`, cat: 'interior' });
-  }
-  for (let i = 1; i <= exteriorCount; i++) {
-    const n = String(i).padStart(3, '0');
-    images.push({ src: `fotos/fotos_exterior/exterior_${n}.jpg`, cat: 'exterior' });
-  }
+  const renderStatic = () => {
+    const { fotos, textos, contactos } = content;
 
-  const grid = document.getElementById('galleryGrid');
-  images.forEach((img, idx) => {
-    const div = document.createElement('div');
-    const hint = layoutHints[idx % layoutHints.length];
-    div.className = `gallery-item${hint ? ' ' + hint : ''}`;
-    div.dataset.cat = img.cat;
-    div.dataset.index = idx;
-    div.innerHTML = `<img src="${img.src}" alt="Casa do Moinho da Ínsua" loading="lazy">`;
-    grid.appendChild(div);
-  });
+    document.getElementById('hero').style.backgroundImage = `url('${imgSrc(fotos.hero)}')`;
+    document.getElementById('aboutImgMain').src = imgSrc(fotos.aboutMain);
+    document.getElementById('aboutImgSub').src = imgSrc(fotos.aboutSub);
+
+    const hostName = textos.about.hostName || '';
+    document.getElementById('hostName').textContent = hostName;
+    document.getElementById('hostAvatar').textContent = hostName.split(/\s+/).filter(Boolean)
+      .map(w => w[0]).filter((_, i, a) => i === 0 || i === a.length - 1).join('').toUpperCase();
+
+    const address = [contactos.addressLine1, contactos.addressLine2].filter(Boolean).join(', ');
+    document.getElementById('locationAddress').textContent = `${address}, Portugal`;
+    document.getElementById('mapFrame').src = `https://www.google.com/maps?q=${encodeURIComponent(address + ', Portugal')}&output=embed`;
+
+    (fotos.gallery || []).filter(img => img.image).forEach((img, idx) => {
+      const div = document.createElement('div');
+      const hint = layoutHints[idx % layoutHints.length];
+      div.className = `gallery-item${hint ? ' ' + hint : ''}`;
+      div.dataset.cat = img.category;
+      div.dataset.index = idx;
+      div.innerHTML = `<img src="${imgSrc(img.image)}" alt="Casa do Moinho da Ínsua" loading="lazy">`;
+      grid.appendChild(div);
+    });
+  };
+
+  /* ---------- Render: language-dependent parts ---------- */
+  const renderLang = (lang) => {
+    const { textos, alojamento, contactos, aviso } = content;
+
+    document.querySelectorAll('[data-c]').forEach(el => {
+      el.textContent = tr(getPath(el.dataset.c), lang);
+    });
+
+    const notice = document.getElementById('siteNotice');
+    const noticeText = aviso.active ? tr(aviso, lang) : '';
+    notice.textContent = noticeText;
+    notice.hidden = !noticeText;
+
+    document.getElementById('aboutParagraphs').innerHTML = (textos.about.paragraphs || [])
+      .map(p => `<p>${esc(tr(p, lang))}</p>`).join('');
+
+    document.getElementById('amenitiesGrid').innerHTML = (alojamento.amenities || []).map(a =>
+      `<div class="amenity"><svg viewBox="0 0 24 24">${amenityIcons[a.icon] || amenityIcons.check}</svg><span>${esc(tr(a, lang))}</span></div>`
+    ).join('');
+
+    document.getElementById('rulesPanel').innerHTML = (alojamento.rules || []).map(r =>
+      `<div class="rule"><p class="rule-label">${esc(tr(r.label, lang))}</p><p class="rule-value">${esc(tr(r.value, lang))}</p></div>`
+    ).join('');
+
+    document.getElementById('nearbyList').innerHTML = (contactos.nearby || []).map(n =>
+      `<li><span>${esc(tr(n.name, lang))}</span><em>${esc(n.distance)}</em></li>`
+    ).join('');
+
+    const ui = (key) => translations[key][lang];
+    const digits = String(contactos.phone || '').replace(/\D/g, '');
+    const intl = digits.length === 9 ? '351' + digits : digits;
+    const instagram = String(contactos.instagram || '').replace(/^https?:\/\/(www\.)?instagram\.com\//, '').replace(/[@/]/g, '');
+    const card = (icon, href, label, value) =>
+      `<a class="contact-card" href="${esc(href)}"${href.startsWith('http') ? ' target="_blank" rel="noopener"' : ''}>` +
+      `<svg viewBox="0 0 24 24">${contactIcons[icon]}</svg><div><p>${esc(label)}</p><strong>${esc(value)}</strong></div></a>`;
+
+    const cards = [];
+    if (digits) cards.push(card('phone', `tel:+${intl}`, ui('contact.phoneLabel'), contactos.phone));
+    if (digits && contactos.whatsapp) cards.push(card('whatsapp', `https://wa.me/${intl}`, 'WhatsApp', ui('contact.whatsappCta')));
+    if (contactos.email) cards.push(card('email', `mailto:${contactos.email}`, 'Email', contactos.email));
+    if (instagram) cards.push(card('instagram', `https://www.instagram.com/${instagram}/`, 'Instagram', `@${instagram}`));
+    if (contactos.facebook) cards.push(card('facebook', contactos.facebook, 'Facebook', ui('contact.facebookCta')));
+    cards.push(
+      `<div class="contact-card contact-card-static"><svg viewBox="0 0 24 24">${contactIcons.address}</svg>` +
+      `<div><p>${esc(ui('contact.addressLabel'))}</p><strong>${esc(contactos.addressLine1)}<br>${esc(contactos.addressLine2)}</strong></div></div>`
+    );
+    document.getElementById('contactCards').innerHTML = cards.join('');
+  };
 
   /* ---------- Gallery filters ---------- */
   const filterBtns = document.querySelectorAll('.filter-btn');
@@ -109,7 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'ArrowRight') document.getElementById('lightboxNext').click();
   });
 
-  /* ---------- i18n ---------- */
+  /* ---------- i18n (fixed interface labels; editable texts live in content/) ---------- */
   const translations = {
     'nav.home': { pt: 'Início', en: 'Home' },
     'nav.about': { pt: 'Sobre Nós', en: 'About Us' },
@@ -118,66 +214,26 @@ document.addEventListener('DOMContentLoaded', () => {
     'nav.location': { pt: 'Localização', en: 'Location' },
     'nav.contact': { pt: 'Contactos', en: 'Contact' },
 
-    'hero.eyebrow': { pt: 'Alojamento Local · Várzea Cova', en: 'Local Accommodation · Várzea Cova' },
-    'hero.subtitle': { pt: 'Um antigo moinho junto ao rio, em plena floresta de carvalhos — natureza, silêncio e um céu cheio de estrelas.', en: 'An old mill by the river, deep in an oak forest — nature, silence and a sky full of stars.' },
     'hero.cta1': { pt: 'Conhecer o Alojamento', en: 'Discover the Stay' },
     'hero.cta2': { pt: 'Contactar', en: 'Get in Touch' },
 
-    'strip.river': { pt: 'Junto ao rio', en: 'By the river' },
-    'strip.stars': { pt: 'Céu de estrelas', en: 'Starry skies' },
-    'strip.privacy': { pt: 'Privacidade total', en: 'Total privacy' },
-    'strip.nature': { pt: 'Reserva natural', en: 'Nature reserve' },
-
     'about.eyebrow': { pt: 'Sobre Nós', en: 'About Us' },
-    'about.title': { pt: 'Uma experiência única em plena natureza', en: 'A truly unique nature experience' },
-    'about.p1': { pt: 'A propriedade situa-se em plena floresta de carvalhos — um dos maiores da Península Ibérica, classificada como reserva agrícola e natural — atravessada por um rio que serpenteia pelo terreno. Duas levadas e um antigo moinho completam a paisagem, num espaço de total privacidade em meio à mata.', en: 'The estate sits amid one of the largest oak forests on the Iberian Peninsula — an area designated as an agricultural and nature reserve — crossed by a river that winds through the grounds. Two weirs and an old mill complete the scenery, offering total privacy amidst lush woodlands.' },
-    'about.p2': { pt: 'Longe das povoações vizinhas, o local distingue-se pela sua privacidade e tranquilidade excecionais. O microclima fresco do carvalhal contrasta agradavelmente com o calor do verão e, graças à reduzida poluição luminosa, o céu noturno revela um panorama raro e espetacular de estrelas.', en: 'Located away from nearby villages, the property is defined by exceptional privacy and tranquility. The cool climate within the oak forest offers a refreshing contrast to the summer heat, and thanks to minimal light pollution, the night sky reveals a rare and spectacular panorama of stars.' },
-    'about.note': { pt: 'Nota: devido à existência de socalcos e à proximidade do rio, recomenda-se especial atenção com crianças pequenas. Para uma estadia tranquila, aconselhamos que os hóspedes tenham, no mínimo, 12 anos.', en: 'Please note: due to the terraces and the nearby river, extreme caution is advised with small children. For a peaceful stay, we recommend guests be at least 12 years of age.' },
     'about.hostLabel': { pt: 'Anfitrião', en: 'Host' },
-    'about.langs': { pt: 'Fala Português, Inglês, Espanhol, Francês e Italiano', en: 'Speaks Portuguese, English, Spanish, French and Italian' },
 
     'stay.eyebrow': { pt: 'O Alojamento', en: 'The Stay' },
-    'stay.title': { pt: 'Um chalé acolhedor, recentemente renovado', en: 'A cosy, recently renovated chalet' },
-    'stay.lead': { pt: 'Com terraço e vista para a montanha, o chalé dispõe de 2 quartos, sala de estar, cozinha totalmente equipada e casa de banho privativa — tudo pensado para um retiro confortável em plena natureza.', en: 'With a terrace and mountain view, the chalet features 2 bedrooms, a living room, a fully equipped kitchen and a private bathroom — everything you need for a comfortable retreat in nature.' },
-
-    'am.rooms': { pt: '2 quartos & sala de estar', en: '2 bedrooms & living room' },
-    'am.kitchen': { pt: 'Cozinha totalmente equipada', en: 'Fully equipped kitchen' },
-    'am.bathroom': { pt: 'Casa de banho privativa', en: 'Private bathroom' },
-    'am.tv': { pt: 'TV & streaming', en: 'TV & streaming' },
-    'am.wifi': { pt: 'WiFi gratuito', en: 'Free WiFi' },
-    'am.parking': { pt: 'Estacionamento privado gratuito', en: 'Free private parking' },
-    'am.ac': { pt: 'Ar condicionado & aquecimento', en: 'Air conditioning & heating' },
-    'am.terrace': { pt: 'Terraço & vista montanha', en: 'Terrace & mountain view' },
-    'am.bbq': { pt: 'Churrasqueira', en: 'BBQ Area' },
-    'am.river': { pt: 'Vista rio & jardim', en: 'River view & garden' },
-
-    'rules.checkinLabel': { pt: 'Check-in', en: 'Check-in' },
-    'rules.checkoutLabel': { pt: 'Check-out', en: 'Check-out' },
-    'rules.checkoutValue': { pt: 'até às 11:00', en: 'until 11:00 AM' },
-    'rules.smokingLabel': { pt: 'Fumar / Festas', en: 'Smoking / Parties' },
-    'rules.smokingValue': { pt: 'Não permitido', en: 'Not allowed' },
 
     'gallery.eyebrow': { pt: 'Galeria', en: 'Gallery' },
-    'gallery.title': { pt: 'O espaço, por dentro e por fora', en: 'The space, inside and out' },
     'gallery.all': { pt: 'Todas', en: 'All' },
     'gallery.exterior': { pt: 'Exterior', en: 'Outdoors' },
     'gallery.interior': { pt: 'Interior', en: 'Indoors' },
 
     'location.eyebrow': { pt: 'Localização', en: 'Location' },
-    'location.title': { pt: 'Várzea Cova, Portugal', en: 'Várzea Cova, Portugal' },
-    'location.lead': { pt: 'Escondida na floresta, mas a uma curta distância de pontos de interesse na região do Minho.', en: 'Tucked away in the forest, yet within easy reach of local landmarks in the Minho region.' },
-    'location.n1': { pt: 'Castelo de Guimarães', en: 'Guimarães Castle' },
-    'location.n2': { pt: 'Paço dos Duques de Bragança', en: 'Palace of the Dukes of Bragança' },
-    'location.n3': { pt: 'Aeroporto Francisco Sá Carneiro', en: 'Francisco Sá Carneiro Airport' },
 
     'contact.eyebrow': { pt: 'Contactos', en: 'Contact' },
-    'contact.title': { pt: 'Vamos planear a sua estadia', en: "Let's plan your stay" },
-    'contact.lead': { pt: 'Entre em contacto diretamente com o anfitrião para saber mais sobre o alojamento.', en: 'Reach out directly to the host to learn more about the accommodation.' },
     'contact.phoneLabel': { pt: 'Telefone', en: 'Phone' },
     'contact.whatsappCta': { pt: 'Enviar mensagem', en: 'Send a message' },
+    'contact.facebookCta': { pt: 'Visitar página', en: 'Visit page' },
     'contact.addressLabel': { pt: 'Morada', en: 'Address' },
-
-    'footer.tagline': { pt: 'Um refúgio junto ao rio, no coração do carvalhal.', en: 'A riverside refuge in the heart of the oak forest.' },
   };
 
   const langToggle = document.getElementById('langToggle');
@@ -192,6 +248,7 @@ document.addEventListener('DOMContentLoaded', () => {
         el.innerHTML = entry[lang];
       }
     });
+    if (content) renderLang(lang);
     langOpts.forEach(opt => opt.classList.toggle('is-active', opt.dataset.lang === lang));
     localStorage.setItem('moinho-lang', lang);
   };
@@ -202,6 +259,13 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   const savedLang = localStorage.getItem('moinho-lang') || 'pt';
-  applyLang(savedLang);
+  const contentReady = loadContent()
+    .then(renderStatic)
+    .catch(err => console.error('Erro ao carregar o conteúdo do site:', err))
+    .finally(() => applyLang(savedLang));
+
+  Promise.all([contentReady, pageLoaded]).then(() => {
+    setTimeout(() => loader.classList.add('is-hidden'), 300);
+  });
 
 });

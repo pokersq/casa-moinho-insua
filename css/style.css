@@ -89,6 +89,14 @@ h1,h2,h3{font-family:var(--font-head);font-weight:600;color:var(--green-dark);}
   box-shadow:0 6px 24px -12px rgba(31,58,44,.25);
   padding:12px 0;
 }
+.site-notice{
+  margin:-22px 0 16px;padding:9px 32px;
+  background:var(--gold);color:var(--white);
+  text-align:center;font-size:.85rem;letter-spacing:.02em;
+  transition:margin .35s ease;
+}
+.site-notice[hidden]{display:none;}
+.site-header.is-scrolled .site-notice{margin:-12px 0 10px;}
 .header-inner{
   max-width:1260px;margin:0 auto;padding:0 32px;
   display:flex;align-items:center;justify-content:space-between;gap:24px;

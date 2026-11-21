@@ -1,0 +1,202 @@
+# Configuração do painel Pages CMS (https://pagescms.org)
+# Cada entrada em "content" é uma secção do painel e corresponde a um ficheiro em content/.
+# Os textos bilingues são objetos { pt, en }: se o inglês ficar vazio, o site mostra o português.
+
+media:
+  input: fotos
+  output: /fotos
+  rename: safe
+  extensions: [jpg, jpeg, png, webp]
+
+settings:
+  content:
+    merge: true
+
+content:
+  - name: fotos
+    label: Fotografias
+    type: file
+    path: content/fotos.json
+    format: json
+    fields:
+      - name: hero
+        label: Foto do topo (fundo)
+        description: A foto grande que aparece por trás do logótipo. Use uma foto na horizontal.
+        type: image
+        required: true
+      - name: aboutMain
+        label: "Sobre Nós: foto grande"
+        type: image
+        required: true
+      - name: aboutSub
+        label: "Sobre Nós: foto pequena"
+        description: Não aparece em telemóveis.
+        type: image
+        required: true
+      - name: gallery
+        label: Galeria
+        description: As fotos aparecem no site pela ordem desta lista.
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{index}. {fields.category} – {fields.image}"
+        fields:
+          - name: image
+            label: Foto
+            type: image
+            required: true
+          - name: category
+            label: Categoria
+            type: select
+            default: exterior
+            options:
+              values:
+                - name: interior
+                  label: Interior
+                - name: exterior
+                  label: Exterior
+
+  - name: textos
+    label: Textos
+    type: file
+    path: content/textos.json
+    format: json
+    fields:
+      - name: hero
+        label: Topo da página
+        type: object
+        fields:
+          - { name: eyebrow, label: Frase pequena por cima, type: object, fields: [ { name: pt, label: Português, type: string }, { name: en, label: Inglês, type: string } ] }
+          - { name: subtitle, label: Frase de apresentação, type: object, fields: [ { name: pt, label: Português, type: text }, { name: en, label: Inglês, type: text } ] }
+      - name: strip
+        label: Faixa verde (4 destaques com ícone)
+        type: object
+        fields:
+          - { name: river, label: "1. Ícone gota", type: object, fields: [ { name: pt, label: Português, type: string }, { name: en, label: Inglês, type: string } ] }
+          - { name: stars, label: "2. Ícone estrela", type: object, fields: [ { name: pt, label: Português, type: string }, { name: en, label: Inglês, type: string } ] }
+          - { name: privacy, label: "3. Ícone pessoa", type: object, fields: [ { name: pt, label: Português, type: string }, { name: en, label: Inglês, type: string } ] }
+          - { name: nature, label: "4. Ícone olho", type: object, fields: [ { name: pt, label: Português, type: string }, { name: en, label: Inglês, type: string } ] }
+      - name: about
+        label: Sobre Nós
+        type: object
+        fields:
+          - { name: title, label: Título, type: object, fields: [ { name: pt, label: Português, type: string }, { name: en, label: Inglês, type: string } ] }
+          - name: paragraphs
+            label: Parágrafos
+            type: object
+            list: true
+            fields:
+              - { name: pt, label: Português, type: text }
+              - { name: en, label: Inglês, type: text }
+          - { name: note, label: Nota (caixa destacada), type: object, fields: [ { name: pt, label: Português, type: text }, { name: en, label: Inglês, type: text } ] }
+          - { name: hostName, label: Nome do anfitrião, type: string }
+          - { name: hostLangs, label: Línguas do anfitrião, type: object, fields: [ { name: pt, label: Português, type: string }, { name: en, label: Inglês, type: string } ] }
+      - name: stay
+        label: O Alojamento
+        type: object
+        fields:
+          - { name: title, label: Título, type: object, fields: [ { name: pt, label: Português, type: string }, { name: en, label: Inglês, type: string } ] }
+          - { name: lead, label: Descrição, type: object, fields: [ { name: pt, label: Português, type: text }, { name: en, label: Inglês, type: text } ] }
+      - name: gallery
+        label: Galeria
+        type: object
+        fields:
+          - { name: title, label: Título, type: object, fields: [ { name: pt, label: Português, type: string }, { name: en, label: Inglês, type: string } ] }
+      - name: location
+        label: Localização
+        type: object
+        fields:
+          - { name: title, label: Título, type: object, fields: [ { name: pt, label: Português, type: string }, { name: en, label: Inglês, type: string } ] }
+          - { name: lead, label: Descrição, type: object, fields: [ { name: pt, label: Português, type: text }, { name: en, label: Inglês, type: text } ] }
+      - name: contact
+        label: Contactos
+        type: object
+        fields:
+          - { name: title, label: Título, type: object, fields: [ { name: pt, label: Português, type: string }, { name: en, label: Inglês, type: string } ] }
+          - { name: lead, label: Descrição, type: object, fields: [ { name: pt, label: Português, type: text }, { name: en, label: Inglês, type: text } ] }
+      - name: footer
+        label: Rodapé
+        type: object
+        fields:
+          - { name: tagline, label: Frase do rodapé, type: object, fields: [ { name: pt, label: Português, type: string }, { name: en, label: Inglês, type: string } ] }
+
+  - name: alojamento
+    label: Comodidades e regras
+    type: file
+    path: content/alojamento.json
+    format: json
+    fields:
+      - name: amenities
+        label: Comodidades
+        description: Aparecem no site pela ordem desta lista.
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{fields.pt}"
+        fields:
+          - name: icon
+            label: Ícone
+            type: select
+            default: check
+            options:
+              values:
+                - { name: check, label: "Visto (genérico)" }
+                - { name: house, label: Casa / quartos }
+                - { name: kitchen, label: Cozinha }
+                - { name: bathroom, label: Casa de banho }
+                - { name: tv, label: Televisão }
+                - { name: wifi, label: WiFi }
+                - { name: parking, label: Estacionamento }
+                - { name: climate, label: Ar condicionado / aquecimento }
+                - { name: terrace, label: Terraço }
+                - { name: bbq, label: Churrasqueira / sol }
+                - { name: river, label: Rio / jardim }
+          - { name: pt, label: Português, type: string, required: true }
+          - { name: en, label: Inglês, type: string }
+      - name: rules
+        label: Regras e horários
+        description: "As caixas verdes por baixo das comodidades (ex.: Check-in 16:00 – 23:30)."
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{index}"
+        fields:
+          - { name: label, label: Título, type: object, fields: [ { name: pt, label: Português, type: string }, { name: en, label: Inglês, type: string } ] }
+          - { name: value, label: Valor, type: object, fields: [ { name: pt, label: Português, type: string }, { name: en, label: Inglês, type: string } ] }
+
+  - name: contactos
+    label: Contactos e localização
+    type: file
+    path: content/contactos.json
+    format: json
+    fields:
+      - { name: phone, label: Telefone, description: "Ex.: 963 238 660", type: string }
+      - { name: whatsapp, label: Mostrar botão do WhatsApp (usa o mesmo número), type: boolean, default: true }
+      - { name: email, label: Email, description: Deixe vazio para não mostrar., type: string }
+      - { name: instagram, label: Instagram (nome de utilizador), description: "Ex.: casamoinhodainsua. Deixe vazio para não mostrar.", type: string }
+      - { name: facebook, label: Facebook (link da página), description: "Ex.: https://www.facebook.com/... Deixe vazio para não mostrar.", type: string }
+      - { name: addressLine1, label: Morada (linha 1), description: Também é usada no mapa., type: string }
+      - { name: addressLine2, label: Morada (linha 2), type: string }
+      - name: nearby
+        label: Locais próximos
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{fields.distance}"
+        fields:
+          - { name: name, label: Nome, type: object, fields: [ { name: pt, label: Português, type: string }, { name: en, label: Inglês, type: string } ] }
+          - { name: distance, label: Distância, description: "Ex.: 27 km", type: string }
+
+  - name: aviso
+    label: Aviso no topo do site
+    type: file
+    path: content/aviso.json
+    format: json
+    fields:
+      - { name: active, label: Mostrar aviso, description: Desligue para esconder o aviso sem apagar o texto., type: boolean, default: false }
+      - { name: pt, label: Texto em português, description: "Ex.: Fechado para manutenção de 6 a 20 de janeiro.", type: string }
+      - { name: en, label: Texto em inglês, type: string }

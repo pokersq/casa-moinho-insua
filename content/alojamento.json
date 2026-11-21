@@ -1,0 +1,19 @@
+{
+  "amenities": [
+    { "icon": "house", "pt": "2 quartos & sala de estar", "en": "2 bedrooms & living room" },
+    { "icon": "kitchen", "pt": "Cozinha totalmente equipada", "en": "Fully equipped kitchen" },
+    { "icon": "bathroom", "pt": "Casa de banho privativa", "en": "Private bathroom" },
+    { "icon": "tv", "pt": "TV & streaming", "en": "TV & streaming" },
+    { "icon": "wifi", "pt": "WiFi gratuito", "en": "Free WiFi" },
+    { "icon": "parking", "pt": "Estacionamento privado gratuito", "en": "Free private parking" },
+    { "icon": "climate", "pt": "Ar condicionado & aquecimento", "en": "Air conditioning & heating" },
+    { "icon": "terrace", "pt": "Terraço & vista montanha", "en": "Terrace & mountain view" },
+    { "icon": "bbq", "pt": "Churrasqueira", "en": "BBQ Area" },
+    { "icon": "river", "pt": "Vista rio & jardim", "en": "River view & garden" }
+  ],
+  "rules": [
+    { "label": { "pt": "Check-in", "en": "Check-in" }, "value": { "pt": "16:00 – 23:30", "en": "16:00 – 23:30" } },
+    { "label": { "pt": "Check-out", "en": "Check-out" }, "value": { "pt": "até às 11:00", "en": "until 11:00 AM" } },
+    { "label": { "pt": "Fumar / Festas", "en": "Smoking / Parties" }, "value": { "pt": "Não permitido", "en": "Not allowed" } }
+  ]
+}
