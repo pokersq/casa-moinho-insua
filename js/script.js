@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('year').textContent = new Date().getFullYear();
 
   /* ---------- Content (content/*.json, editado no Pages CMS) ---------- */
-  const contentFiles = ['fotos', 'textos', 'alojamento', 'contactos', 'aviso'];
+  const contentFiles = ['fotos', 'textos', 'alojamento', 'contactos', 'aviso', 'avaliacoes', 'atividades'];
   let content = null;
 
   const loadContent = () => Promise.all(contentFiles.map(name =>
@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ---------- Render: language-dependent parts ---------- */
   const renderLang = (lang) => {
-    const { textos, alojamento, contactos, aviso } = content;
+    const { textos, alojamento, contactos, aviso, avaliacoes, atividades } = content;
 
     document.querySelectorAll('[data-c]').forEach(el => {
       el.textContent = tr(getPath(el.dataset.c), lang);
@@ -125,6 +125,33 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('rulesPanel').innerHTML = (alojamento.rules || []).map(r =>
       `<div class="rule"><p class="rule-label">${esc(tr(r.label, lang))}</p><p class="rule-value">${esc(tr(r.value, lang))}</p></div>`
     ).join('');
+
+    // A secção de avaliações só aparece quando há pelo menos uma
+    const reviews = (avaliacoes.reviews || []).filter(r => tr(r.text, lang));
+    document.getElementById('avaliacoes').hidden = !reviews.length;
+    document.getElementById('reviewsGrid').innerHTML = reviews.map(r => {
+      const stars = Math.max(0, Math.min(5, Number(r.rating) || 0));
+      const meta = [r.country, r.platform].filter(Boolean).map(esc).join(' · ');
+      return `<figure class="review">` +
+        (stars ? `<div class="review-stars" aria-label="${stars}/5">${'★'.repeat(stars)}<span>${'★'.repeat(5 - stars)}</span></div>` : '') +
+        `<blockquote>${esc(tr(r.text, lang))}</blockquote>` +
+        `<figcaption><strong>${esc(r.name)}</strong>${meta ? `<span>${meta}</span>` : ''}</figcaption></figure>`;
+    }).join('');
+
+    // Tal como as avaliações, a secção de atividades só aparece quando há pelo menos uma
+    const activities = (atividades.activities || []).filter(a => tr(a.name, lang));
+    document.getElementById('atividades').hidden = !activities.length;
+    document.getElementById('activitiesGrid').innerHTML = activities.map(a => {
+      const link = /^https?:\/\//.test(a.link || '') ? a.link : '';
+      return `<article class="activity">` +
+        (a.image ? `<img src="${imgSrc(a.image)}" alt="${esc(tr(a.name, lang))}" loading="lazy">` : '') +
+        `<div class="activity-body">` +
+        (a.distance ? `<p class="activity-distance">${esc(a.distance)}</p>` : '') +
+        `<h3>${esc(tr(a.name, lang))}</h3>` +
+        (tr(a.text, lang) ? `<p>${esc(tr(a.text, lang))}</p>` : '') +
+        (link ? `<a class="activity-link" href="${esc(link)}" target="_blank" rel="noopener">${esc(translations['activities.more'][lang])} &rarr;</a>` : '') +
+        `</div></article>`;
+    }).join('');
 
     document.getElementById('nearbyList').innerHTML = (contactos.nearby || []).map(n =>
       `<li><span>${esc(tr(n.name, lang))}</span><em>${esc(n.distance)}</em></li>`
@@ -226,6 +253,11 @@ document.addEventListener('DOMContentLoaded', () => {
     'gallery.all': { pt: 'Todas', en: 'All' },
     'gallery.exterior': { pt: 'Exterior', en: 'Outdoors' },
     'gallery.interior': { pt: 'Interior', en: 'Indoors' },
+
+    'reviews.eyebrow': { pt: 'Avaliações', en: 'Reviews' },
+
+    'activities.eyebrow': { pt: 'Atividades', en: 'Activities' },
+    'activities.more': { pt: 'Saber mais', en: 'Learn more' },
 
     'location.eyebrow': { pt: 'Localização', en: 'Location' },
 

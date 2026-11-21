@@ -191,6 +191,65 @@ content:
           - { name: name, label: Nome, type: object, fields: [ { name: pt, label: Português, type: string }, { name: en, label: Inglês, type: string } ] }
           - { name: distance, label: Distância, description: "Ex.: 27 km", type: string }
 
+  - name: avaliacoes
+    label: Avaliações de hóspedes
+    type: file
+    path: content/avaliacoes.json
+    format: json
+    fields:
+      - { name: title, label: Título da secção, type: object, fields: [ { name: pt, label: Português, type: string }, { name: en, label: Inglês, type: string } ] }
+      - name: reviews
+        label: Avaliações
+        description: A secção só aparece no site quando houver pelo menos uma avaliação. Aparecem pela ordem desta lista.
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{fields.name}"
+        fields:
+          - { name: name, label: Nome do hóspede, description: "Ex.: Ana S.", type: string, required: true }
+          - { name: country, label: País ou cidade, description: Opcional., type: string }
+          - name: rating
+            label: Estrelas
+            type: select
+            default: "5"
+            options:
+              values:
+                - { name: "5", label: "★★★★★ (5)" }
+                - { name: "4", label: "★★★★ (4)" }
+                - { name: "3", label: "★★★ (3)" }
+                - { name: "0", label: Não mostrar estrelas }
+          - name: platform
+            label: Origem
+            description: Opcional. Aparece ao lado do país.
+            type: select
+            options:
+              values: [Booking, Airbnb, Google]
+          - { name: text, label: Texto, type: object, fields: [ { name: pt, label: Português, type: text }, { name: en, label: Inglês, type: text } ] }
+
+  - name: atividades
+    label: Atividades na zona
+    type: file
+    path: content/atividades.json
+    format: json
+    fields:
+      - { name: title, label: Título da secção, type: object, fields: [ { name: pt, label: Português, type: string }, { name: en, label: Inglês, type: string } ] }
+      - { name: lead, label: Frase de introdução, type: object, fields: [ { name: pt, label: Português, type: text }, { name: en, label: Inglês, type: text } ] }
+      - name: activities
+        label: Atividades
+        description: A secção só aparece no site quando houver pelo menos uma atividade. Aparecem pela ordem desta lista.
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{index}"
+        fields:
+          - { name: image, label: Foto, description: Opcional. De preferência na horizontal., type: image }
+          - { name: name, label: Nome, description: "Ex.: Passeio a pé pelo carvalhal", type: object, fields: [ { name: pt, label: Português, type: string }, { name: en, label: Inglês, type: string } ] }
+          - { name: text, label: Descrição, type: object, fields: [ { name: pt, label: Português, type: text }, { name: en, label: Inglês, type: text } ] }
+          - { name: distance, label: Distância ou duração, description: "Opcional. Ex.: 5 km, 10 min de carro, No local", type: string }
+          - { name: link, label: Link para saber mais, description: "Opcional. Link completo, começado por https://", type: string }
+
   - name: aviso
     label: Aviso no topo do site
     type: file
