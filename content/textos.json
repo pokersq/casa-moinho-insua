@@ -1,40 +1,97 @@
 {
   "hero": {
-    "eyebrow": { "pt": "Alojamento Local · Várzea Cova", "en": "Local Accommodation · Várzea Cova" },
-    "subtitle": { "pt": "Um antigo moinho junto ao rio, em plena floresta de carvalhos — natureza, silêncio e um céu cheio de estrelas.", "en": "An old mill by the river, deep in an oak forest — nature, silence and a sky full of stars." }
+    "eyebrow": {
+      "pt": "Alojamento Local · Várzea Cova",
+      "en": "Local Accommodation · Várzea Cova"
+    },
+    "subtitle": {
+      "pt": "Uma casa com um antigo moinho junto ao rio, em plena floresta de carvalhos — natureza, silêncio e um céu cheio de estrelas.",
+      "en": "An house with an old mill by the river, deep in an oak forest — nature, silence and a sky full of stars."
+    }
   },
   "strip": {
-    "river": { "pt": "Junto ao rio", "en": "By the river" },
-    "stars": { "pt": "Céu de estrelas", "en": "Starry skies" },
-    "privacy": { "pt": "Privacidade total", "en": "Total privacy" },
-    "nature": { "pt": "Reserva natural", "en": "Nature reserve" }
+    "river": {
+      "pt": "Junto ao rio",
+      "en": "By the river"
+    },
+    "stars": {
+      "pt": "Céu de estrelas",
+      "en": "Starry skies"
+    },
+    "privacy": {
+      "pt": "Privacidade total",
+      "en": "Total privacy"
+    },
+    "nature": {
+      "pt": "Reserva natural",
+      "en": "Nature reserve"
+    }
   },
   "about": {
-    "title": { "pt": "Uma experiência única em plena natureza", "en": "A truly unique nature experience" },
+    "title": {
+      "pt": "Uma experiência única em plena natureza",
+      "en": "A truly unique nature experience"
+    },
     "paragraphs": [
-      { "pt": "A propriedade situa-se em plena floresta de carvalhos — um dos maiores da Península Ibérica, classificada como reserva agrícola e natural — atravessada por um rio que serpenteia pelo terreno. Duas levadas e um antigo moinho completam a paisagem, num espaço de total privacidade em meio à mata.", "en": "The estate sits amid one of the largest oak forests on the Iberian Peninsula — an area designated as an agricultural and nature reserve — crossed by a river that winds through the grounds. Two weirs and an old mill complete the scenery, offering total privacy amidst lush woodlands." },
-      { "pt": "Longe das povoações vizinhas, o local distingue-se pela sua privacidade e tranquilidade excecionais. O microclima fresco do carvalhal contrasta agradavelmente com o calor do verão e, graças à reduzida poluição luminosa, o céu noturno revela um panorama raro e espetacular de estrelas.", "en": "Located away from nearby villages, the property is defined by exceptional privacy and tranquility. The cool climate within the oak forest offers a refreshing contrast to the summer heat, and thanks to minimal light pollution, the night sky reveals a rare and spectacular panorama of stars." }
+      {
+        "pt": "A propriedade de 25.000 metros quadrados situa-se numa das maiores florestas de carvalhos da Península Ibérica — uma área designada como reserva agrícola e ecológica — e é envolta por um rio que serpenteia o terreno. Dois açudes e um antigo moinho completam o cenário, proporcionando total privacidade no coração da natureza.",
+        "en": "The 25,000-square-meter property is located within one of the largest oak forests on the Iberian Peninsula—an area designated as an agricultural and ecological reserve—and is bordered by a river that winds through the land. Two weirs and an old mill complete the setting, offering total privacy in the heart of nature."
+      },
+      {
+        "pt": "Longe das povoações vizinhas, o local distingue-se pela sua privacidade e tranquilidade excecionais. O microclima fresco do carvalhal contrasta agradavelmente com o calor do verão e, graças à reduzida poluição luminosa, o céu noturno revela um panorama raro e espetacular de estrelas.",
+        "en": "Located away from nearby villages, the property is defined by exceptional privacy and tranquility. The cool climate within the oak forest offers a refreshing contrast to the summer heat, and thanks to minimal light pollution, the night sky reveals a rare and spectacular panorama of stars."
+      }
     ],
-    "note": { "pt": "Nota: devido à existência de socalcos e à proximidade do rio, recomenda-se especial atenção com crianças pequenas. Para uma estadia tranquila, aconselhamos que os hóspedes tenham, no mínimo, 12 anos.", "en": "Please note: due to the terraces and the nearby river, extreme caution is advised with small children. For a peaceful stay, we recommend guests be at least 12 years of age." },
+    "note": {
+      "pt": "Nota: devido à existência de socalcos e à proximidade do rio, recomenda-se especial atenção com crianças pequenas. Para uma estadia tranquila, aconselhamos que os hóspedes tenham, no mínimo, 12 anos.",
+      "en": "Please note: due to the terraces and the nearby river, extreme caution is advised with small children. For a peaceful stay, we recommend guests be at least 12 years of age."
+    },
     "hostName": "Pedro Baptista",
-    "hostLangs": { "pt": "Fala Português, Inglês, Espanhol, Francês e Italiano", "en": "Speaks Portuguese, English, Spanish, French and Italian" }
+    "hostLangs": {
+      "pt": "Fala Português, Inglês, Espanhol, Francês e Italiano",
+      "en": "Speaks Portuguese, English, Spanish, French and Italian"
+    }
   },
   "stay": {
-    "title": { "pt": "Um chalé acolhedor, recentemente renovado", "en": "A cosy, recently renovated chalet" },
-    "lead": { "pt": "Com terraço e vista para a montanha, o chalé dispõe de 2 quartos, sala de estar, cozinha totalmente equipada e casa de banho privativa — tudo pensado para um retiro confortável em plena natureza.", "en": "With a terrace and mountain view, the chalet features 2 bedrooms, a living room, a fully equipped kitchen and a private bathroom — everything you need for a comfortable retreat in nature." }
+    "title": {
+      "pt": "Um chalé acolhedor, recentemente renovado",
+      "en": "A cosy, recently renovated chalet"
+    },
+    "lead": {
+      "pt": "Com terraço e vista para a montanha, o chalé dispõe de 2 quartos, sala de estar, cozinha totalmente equipada e casa de banho — tudo pensado para um retiro confortável em plena natureza.",
+      "en": "With a terrace and mountain view, the chalet features 2 bedrooms, a living room, a fully equipped kitchen and a bathroom — everything you need for a comfortable retreat in nature."
+    }
   },
   "gallery": {
-    "title": { "pt": "O espaço, por dentro e por fora", "en": "The space, inside and out" }
+    "title": {
+      "pt": "O espaço, interior e exterior",
+      "en": "The space, inside and out"
+    }
   },
   "location": {
-    "title": { "pt": "Várzea Cova, Portugal", "en": "Várzea Cova, Portugal" },
-    "lead": { "pt": "Escondida na floresta, mas a uma curta distância de pontos de interesse na região do Minho.", "en": "Tucked away in the forest, yet within easy reach of local landmarks in the Minho region." }
+    "title": {
+      "pt": "Várzea Cova, Portugal",
+      "en": "Várzea Cova, Portugal"
+    },
+    "lead": {
+      "pt": "Escondida na floresta, mas a uma curta distância de pontos de interesse na região do Minho.\n",
+      "en": "Tucked away in the forest, yet within easy reach of local landmarks in the Minho region."
+    }
   },
   "contact": {
-    "title": { "pt": "Vamos planear a sua estadia", "en": "Let's plan your stay" },
-    "lead": { "pt": "Entre em contacto diretamente com o anfitrião para saber mais sobre o alojamento.", "en": "Reach out directly to the host to learn more about the accommodation." }
+    "title": {
+      "pt": "Vamos planear a sua estadia",
+      "en": "Let's plan your stay"
+    },
+    "lead": {
+      "pt": "Entre em contacto diretamente com o anfitrião para saber mais sobre o alojamento.",
+      "en": "Reach out directly to the host to learn more about the accommodation."
+    }
   },
   "footer": {
-    "tagline": { "pt": "Um refúgio junto ao rio, no coração do carvalhal.", "en": "A riverside refuge in the heart of the oak forest." }
+    "tagline": {
+      "pt": "Um refúgio junto ao rio, no coração do carvalhal.",
+      "en": "A riverside refuge in the heart of the oak forest."
+    }
   }
 }
