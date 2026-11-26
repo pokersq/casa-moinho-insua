@@ -37,6 +37,17 @@
         "en": "The strangest house in the world: the House of the Rock (Casa do Penedo)!"
       },
       "link": "https://www.facebook.com/casadopenedooficial/?locale=pt_PT"
+    },
+    {
+      "name": {
+        "pt": "Centro Histórico de Fafe"
+      },
+      "text": {
+        "pt": "A típica cidade de Fafe, com o seu magnifico teatro e a estátua à \"Justiça de Fafe\"!",
+        "en": "The quintessential town of Fafe, with its magnificent theater and the statue dedicated to the \"Justice of Fafe\"!"
+      },
+      "distance": "15 min de carro",
+      "link": "https://www.cm-fafe.pt/guia-turistico"
     }
   ]
 }
