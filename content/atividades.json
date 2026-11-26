@@ -18,6 +18,24 @@
         "en": "Be sure to visit the beautiful monastery church and learn about regional traditions at the adjacent Casa do Tempo. Both activities are free of charge and located in Cabeceiras de Basto, 12 km from Casa do Moinho da Insua"
       },
       "distance": "15 min de carro"
+    },
+    {
+      "name": {
+        "pt": "A Íncrivel Levada da Víbora e Moínhos de Rei",
+        "en": "The Incredible Levada da Víbora and the King’s Mills"
+      },
+      "text": {
+        "pt": "Para os adeptos das caminhadas e da Natureza, um dos mais famosos trilhos a fazer no Norte de Portugal!",
+        "en": "For those who love hiking and nature, this is one of the most famous trails to explore in Northern Portugal!"
+      },
+      "distance": "29 min de carro",
+      "link": "https://cabeceirasdebasto.pt/turismo-moinhos-de-rei"
+    },
+    {
+      "name": {
+        "pt": "A Casa mais estranha do Mundo: a Casa do Penedo!",
+        "en": "The strangest house in the world: the House of the Rock (Casa do Penedo)!"
+      }
     }
   ]
 }
