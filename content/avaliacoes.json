@@ -1,4 +1,28 @@
 {
-  "title": { "pt": "O que dizem os nossos hóspedes", "en": "What our guests say" },
-  "reviews": []
+  "title": {
+    "pt": "O que dizem os nossos hóspedes",
+    "en": "What our guests say"
+  },
+  "reviews": [
+    {
+      "name": "Rui Sousa",
+      "country": "Lisboa",
+      "rating": "5",
+      "platform": "Booking",
+      "text": {
+        "pt": "Maravilhosa , se quer um espaço lindo e acolhedor é este, voltaremos de certeza!\n\nNão podemos dizer o que gostamos mais porque tudo é excelente!!!\nMas se dissesse do que mais gostei seriam duas:\nA cama é super confortável e o espaço de refeições exterior mágico!!!",
+        "en": "Wonderful! If you’re looking for a beautiful and welcoming space, this is the one—we will definitely be back!\n\nIt’s impossible to say what we liked most because everything was excellent!!!\nBut if I had to pick, there are two things that stood out:\nThe bed is super comfortable, and the outdoor dining area is magical!!!"
+      }
+    },
+    {
+      "name": "Cristiana",
+      "country": "Santa Maria da Feira",
+      "rating": "5",
+      "platform": "Booking",
+      "text": {
+        "pt": "Exceptional!!!\n\nTudo! O enquadramento da casa é definitivamente o mais especial - junto ao rio, num dos maiores carvalhais da península Ibérica! A casa é muito confortável e reabilitada com muito bom gosto, tomando atenção a todos os pormenores. Cozinha super bem equipada. Tudo pronto com o maior conforto. A Cristina e o Pedro são ótimos anfitriões, muito cuidadosos e atenciosos. Recomendamos muito e tencionamos voltar!",
+        "en": "Exceptional!!\n\nEverything! The setting of the house is truly the most special aspect—nestled by the river, within one of the largest oak forests on the Iberian Peninsula! The house is very comfortable and has been restored with great taste, with careful attention to every detail. The kitchen is exceptionally well-equipped. Everything is set up for maximum comfort. Cristina and Pedro are wonderful hosts—very thoughtful and attentive. We highly recommend it and definitely plan to return!"
+      }
+    }
+  ]
 }
