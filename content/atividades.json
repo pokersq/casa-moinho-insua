@@ -48,6 +48,18 @@
       },
       "distance": "15 min de carro",
       "link": "https://www.cm-fafe.pt/guia-turistico"
+    },
+    {
+      "name": {
+        "pt": "Castelo de Arnoia e Fantástica Aldeia Miniatura Pedro Lemos  !",
+        "en": "Arnoia Castle and Fantastic Pedro Lemos Miniature Village!"
+      },
+      "text": {
+        "pt": "Um fantástico castelo a não perder e uma surpresa em plena Serra!!!",
+        "en": "\nA fantastic castle that’s not to be missed—a surprise right in the heart of the mountains!!!"
+      },
+      "distance": "37 min de carro",
+      "link": "https://www.rotadoromanico.com/pt/experiencias/o-que-ver-e-fazer/aldeia-miniatura-do-pedro-lemos/"
     }
   ]
 }
