@@ -1,5 +1,23 @@
 {
-  "title": { "pt": "O que fazer por perto", "en": "Things to do nearby" },
-  "lead": { "pt": "Sugestões para aproveitar a natureza e a região durante a sua estadia.", "en": "Ideas to enjoy nature and the region during your stay." },
-  "activities": []
+  "title": {
+    "pt": "O que fazer por perto",
+    "en": "Things to do nearby"
+  },
+  "lead": {
+    "pt": "Sugestões para aproveitar a natureza e a região durante a sua estadia.",
+    "en": "Ideas to enjoy nature and the region during your stay."
+  },
+  "activities": [
+    {
+      "name": {
+        "pt": "Mosteiro de São Miguel de Refojos e Casa do Tempo",
+        "en": "Monastery of São Miguel de Refojos and House of Time"
+      },
+      "text": {
+        "pt": "Não deixe de visitar a belíssima igreja do Mosteiro, e aprenda acerca das tradições regionais na contígua Casa do Tempo! Ambas as actividades são gratuitas em Cabeceiras de Basto, a 12 km da Casa do Moinho da Ínsua.",
+        "en": "Be sure to visit the beautiful monastery church and learn about regional traditions at the adjacent Casa do Tempo. Both activities are free of charge and located in Cabeceiras de Basto, 12 km from Casa do Moinho da Insua"
+      },
+      "distance": "15 min de carro"
+    }
+  ]
 }
