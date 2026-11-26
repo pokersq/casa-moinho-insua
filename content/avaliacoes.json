@@ -33,6 +33,16 @@
         "pt": "Excelente Anfitrião!!! A Repetir!!!",
         "en": "Excellent host!!! Will definitely return!!!"
       }
+    },
+    {
+      "name": "Luís",
+      "country": "Barreiro",
+      "rating": "5",
+      "platform": "Booking",
+      "text": {
+        "pt": "Um Refúgio da Natureza!!!\n\nDesde o acolhimento dos anfitriões, à incrível envolvência da natureza, a casa super acolhedora e cheia de conforto, onde durante uns dias o tempo pára para quem tem o privilégio de usufruir desta estadia.\nIncrível!!!",
+        "en": "Nature’s Refuge\n\nFrom the warm welcome by the hosts to the incredible natural surroundings, the house itself is super cozy and full of comfort—a place where, for a few days, time stands still for those privileged enough to enjoy a stay here.\nIncredible!!!!"
+      }
     }
   ]
 }
